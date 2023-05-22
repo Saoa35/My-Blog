@@ -1,5 +1,4 @@
 import React from "react";
-
 import { Post } from "../components/Post";
 import { Index } from "../components/AddComment";
 import { CommentsBlock } from "../components/CommentsBlock";
@@ -37,7 +36,7 @@ export const FullPost = () => {
               fullName: "Jack Nickolson",
               avatarUrl: "https://mui.com/static/images/avatar/1.jpg",
             },
-            text: "Это тестовый комментарий 555555",
+            text: "This is first test comment",
           },
           {
             user: {
