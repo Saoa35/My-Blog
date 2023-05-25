@@ -19,16 +19,18 @@ const authSlice = createSlice({
   initialState,
   extraReducers: {
     [fetchUserData.pending]: (state) => {
-      state.posts.items = [];
-      state.posts.status = "loading";
+      state.data = null;
+      state.status = "loading";
     },
     [fetchUserData.fulfilled]: (state, action) => {
-      state.posts.items = action.payload;
-      state.posts.status = "loaded";
+      state.data = action.payload;
+      state.status = "loaded";
     },
     [fetchUserData.pending]: (state) => {
-      state.posts.items = [];
-      state.posts.status = "error";
+      state.data = null;
+      state.status = "error";
     },
   },
 });
+
+export const authReducer = authSlice.reducer;
