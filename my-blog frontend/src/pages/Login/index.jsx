@@ -6,8 +6,12 @@ import Button from "@mui/material/Button";
 
 import styles from "./Login.module.scss";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { fetchAuth } from "../../redux/slices/auth";
 
 export const Login = () => {
+  const dispatch = useDispatch();
+
   const {
     register,
     handleSubmit,
@@ -16,7 +20,7 @@ export const Login = () => {
   } = useForm({ defaultValues: { email: "", password: "" }, mode: "onChange" });
 
   const onSubmit = (values) => {
-    console.log(values);
+    dispatch(fetchAuth(values));
   };
 
   return (
