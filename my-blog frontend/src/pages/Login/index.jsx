@@ -13,24 +13,39 @@ export const Login = () => {
     handleSubmit,
     setError,
     formState: { errors, isValid },
-  } = useForm({ defaultValues: { email: "", password: "" } });
+  } = useForm({ defaultValues: { email: "", password: "" }, mode: "onChange" });
+
+  const onSubmit = (values) => {
+    console.log(values);
+  };
 
   return (
     <Paper classes={{ root: styles.root }}>
       <Typography classes={{ root: styles.title }} variant="h5">
         Login
       </Typography>
-      <TextField
-        className={styles.field}
-        label="E-Mail"
-        error
-        helperText="Invalid mail"
-        fullWidth
-      />
-      <TextField className={styles.field} label="Password" fullWidth />
-      <Button size="large" variant="contained" fullWidth>
-        Sign in
-      </Button>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <TextField
+          className={styles.field}
+          label="E-Mail"
+          type="email"
+          error={Boolean(errors.email?.message)}
+          helperText={errors.email?.message}
+          {...register("email", { required: "Enter your email" })}
+          fullWidth
+        />
+        <TextField
+          className={styles.field}
+          label="Password"
+          error={Boolean(errors.рassword?.message)}
+          helperText={errors.рassword?.message}
+          {...register("рassword", { required: "Enter your рassword" })}
+          fullWidth
+        />
+        <Button type="submit" size="large" variant="contained" fullWidth>
+          Sign in
+        </Button>
+      </form>
     </Paper>
   );
 };
