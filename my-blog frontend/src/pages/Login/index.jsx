@@ -60,7 +60,13 @@ export const Login = () => {
           {...register("рassword", { required: "Enter your рassword" })}
           fullWidth
         />
-        <Button type="submit" size="large" variant="contained" fullWidth>
+        <Button
+          type="submit"
+          size="large"
+          variant="contained"
+          fullWidth
+          disabled={!isValid}
+        >
           Sign in
         </Button>
       </form>
