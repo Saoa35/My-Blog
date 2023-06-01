@@ -46,6 +46,19 @@ const authSlice = createSlice({
       state.status = "error";
     },
 
+    [fetchRegister.pending]: (state) => {
+      state.data = null;
+      state.status = "loading";
+    },
+    [fetchRegister.fulfilled]: (state, action) => {
+      state.data = action.payload;
+      state.status = "loaded";
+    },
+    [fetchRegister.pending]: (state) => {
+      state.data = null;
+      state.status = "error";
+    },
+
     [fetchAuthMe.pending]: (state) => {
       state.data = null;
       state.status = "loading";

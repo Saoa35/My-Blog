@@ -9,7 +9,7 @@ import styles from "./Login.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { fetchAuth, selectIsAuth } from "../../redux/slices/auth";
+import { fetchRegister, selectIsAuth } from "../../redux/slices/auth";
 
 export const Registration = () => {
   const isAuth = useSelector(selectIsAuth);
@@ -18,7 +18,6 @@ export const Registration = () => {
   const {
     register,
     handleSubmit,
-    setError,
     formState: { errors, isValid },
   } = useForm({
     defaultValues: { fullName: "", email: "", password: "" },
@@ -26,7 +25,7 @@ export const Registration = () => {
   });
 
   const onSubmit = async (values) => {
-    const data = await dispatch(fetchAuth(values));
+    const data = await dispatch(fetchRegister(values));
 
     if (!data.payload) {
       return alert("Failed to register!");

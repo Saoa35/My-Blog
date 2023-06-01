@@ -17,12 +17,11 @@ export const Login = () => {
   const {
     register,
     handleSubmit,
-    setError,
     formState: { errors, isValid },
-  } = useForm({ defaultValues: { email: "", password: "" }, mode: "onChange" });
+  } = useForm({ mode: "onChange" });
 
   const onSubmit = async (values) => {
-    const data = await dispatch(fetchAuth(values));
+    const data = await dispatch(fetchAuth({ values }));
 
     if (!data.payload) {
       return alert("Failed to login!");
@@ -53,10 +52,11 @@ export const Login = () => {
           fullWidth
         />
         <TextField
+          type="рassword"
           className={styles.field}
           label="Password"
-          error={Boolean(errors.рassword?.message)}
-          helperText={errors.рassword?.message}
+          error={Boolean(errors.password?.message)}
+          helperText={errors.password?.message}
           {...register("рassword", { required: "Enter your рassword" })}
           fullWidth
         />
