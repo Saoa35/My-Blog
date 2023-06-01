@@ -9,24 +9,27 @@ import styles from "./AddPost.module.scss";
 import { useSelector } from "react-redux";
 import { selectIsAuth } from "../../redux/slices/auth";
 import { Navigate } from "react-router-dom";
+import axios from "../../axios";
 
 export const AddPost = () => {
   const isAuth = useSelector(selectIsAuth);
 
   const inputFileRef = useRef(null);
 
-  const imageUrl = "";
   const [value, setValue] = useState("");
   const [title, setTitle] = useState("");
   const [tags, setTags] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
 
   const handleChangeFile = async (event) => {
     try {
       const formData = new FormData();
       const file = event.target.files[0];
       formData.append("image", file);
+      const { data } = await axios.post("/upload", formData);
     } catch (error) {
-      console.log(error);
+      console.warn(error);
+      alert("File upload error!");
     }
   };
 
@@ -71,17 +74,22 @@ export const AddPost = () => {
         hidden
       />
       {imageUrl && (
-        <Button variant="contained" color="error" onClick={onClickRemoveImage}>
-          Delete
-        </Button>
+        <>
+          <Button
+            variant="contained"
+            color="error"
+            onClick={onClickRemoveImage}
+          >
+            Delete
+          </Button>
+          <img
+            className={styles.image}
+            src={`http://localhost:4444${imageUrl}`}
+            alt="Uploaded"
+          />
+        </>
       )}
-      {imageUrl && (
-        <img
-          className={styles.image}
-          src={`http://localhost:4444${imageUrl}`}
-          alt="Uploaded"
-        />
-      )}
+
       <br />
       <br />
       <TextField
