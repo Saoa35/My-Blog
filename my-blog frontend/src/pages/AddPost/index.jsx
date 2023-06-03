@@ -50,6 +50,7 @@ export const AddPost = () => {
         title,
         imageUrl,
         tags,
+        text,
       };
       const { data } = await axios.post("/posts", fields);
       const id = data._id;
